@@ -1,7 +1,6 @@
 resource "aws_security_group" "alb_app" {
 
   name               = "roboshop-${var.COMPONENT}-${var.ENV}"
-  name               = "roboshop-${var.COMPONENT}-${var.ENV}"
   vpc_id             = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
@@ -29,6 +28,6 @@ resource "aws_security_group" "alb_app" {
   }
 
   tags = {
-    Name = "roboshop-private-alb-${var.ENV}"
+    Name = "roboshop-${var.COMPONENT}-${var.ENV}"
   }
 }
