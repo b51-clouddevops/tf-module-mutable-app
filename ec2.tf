@@ -31,7 +31,8 @@ resource "aws_instance" "od" {
   count                      = var.OD_INSTANCE_COUNT
   ami                        = data.aws_ami.myami.image_id
   instance_type              = var.INSTANCE_TYPE
-  vpc_security_group_ids     = [aws_security_group.allows_ssh.id]
+  vpc_security_group_ids     = [aws_security_group.allow_app.id]
+  subnet_id                    = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_ID, count.index)
 
   connection {
     type     = "ssh"
