@@ -28,7 +28,8 @@ resource "aws_spot_instance_request" "spot" {
 
 # tags will be created for spot request, not for the server, hence creating the tags for spot-servers
 resource "aws_ec2_tag" "spot-tags" {
-  resource_id = 
+  count       = var.SPOT_INSTANCE_COUNT
+  resource_id = element()
   key         = "Name"
   value       = "Hello World"
 }
