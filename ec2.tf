@@ -26,6 +26,8 @@ resource "aws_spot_instance_request" "spot" {
 #   }
 }
 
+# tags will be creat
+
 # Creates On-Demand-Server
 resource "aws_instance" "od" {
   count                      = var.OD_INSTANCE_COUNT
