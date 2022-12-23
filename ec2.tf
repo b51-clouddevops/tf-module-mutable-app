@@ -48,6 +48,6 @@ resource "aws_instance" "od" {
 #   }
 
   tags = {
-    Name = "${var.COMPONENT}-robot"
+    Name = "${var.COMPONENT}-od-${var.ENV}"
   }
 }
