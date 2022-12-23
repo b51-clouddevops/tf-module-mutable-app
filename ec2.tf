@@ -6,6 +6,7 @@ resource "aws_spot_instance_request" "spot" {
   instance_type                = var.INSTANCE_TYPE
   wait_for_fulfillment         = true
   vpc_security_group_ids       = [aws_security_group.allow_app.id]
+  subnet_id                    = aws_subnet.my_subnet.id
 
   tags = {
     Name = "${var.COMPONENT}-${var.ENV}"
