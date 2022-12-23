@@ -6,7 +6,7 @@ resource "aws_security_group" "alb_app" {
 
   ingress {
     description      = "Allow http from internal traffic only"
-    from_port        = 80
+    from_port        = frotnend = 80 ; backend = 8080
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
