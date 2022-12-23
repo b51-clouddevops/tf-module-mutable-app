@@ -27,8 +27,9 @@ resource "aws_spot_instance_request" "spot" {
 
 # Creates On-Demand-Server
 resource "aws_instance" "od" {
+  count                      = var.OD_INSTANCE_COUNT
   ami                        = data.aws_ami.myami.image_id
-  instance_type              = "t3.micro"
+  instance_type              = var.INSTANCE_TYPE
   vpc_security_group_ids     = [aws_security_group.allows_ssh.id]
 
   connection {
