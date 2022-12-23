@@ -1,3 +1,5 @@
+
+# Creates SPOT Server
 resource "aws_spot_instance_request" "spot" {
   count                        = var.SPOT_INSTANCE_COUNT
   ami                          = data.aws_ami.myami.image_id
