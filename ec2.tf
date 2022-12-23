@@ -26,7 +26,12 @@ resource "aws_spot_instance_request" "spot" {
 #   }
 }
 
-# tags will be creat
+# tags will be created for spot request, not for the server, hence creating the tags for spot-servers
+resource "aws_ec2_tag" "spot-tags" {
+  resource_id = 
+  key         = "Name"
+  value       = "Hello World"
+}
 
 # Creates On-Demand-Server
 resource "aws_instance" "od" {
