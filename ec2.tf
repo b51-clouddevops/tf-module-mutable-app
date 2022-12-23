@@ -6,7 +6,7 @@ resource "aws_spot_instance_request" "spot" {
   instance_type                = var.INSTANCE_TYPE
   wait_for_fulfillment         = true
   vpc_security_group_ids       = [aws_security_group.allow_app.id]
-  subnet_id                    = 
+  subnet_id                    = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_ID, count.index)
 
   tags = {
     Name = "${var.COMPONENT}-${var.ENV}"
