@@ -1,4 +1,4 @@
-resource "aws_security_group" "alb_app" {
+resource "aws_security_group" "allow_app" {
 
   name               = "roboshop-${var.COMPONENT}-${var.ENV}"
   vpc_id             = data.terraform_remote_state.vpc.outputs.VPC_ID
