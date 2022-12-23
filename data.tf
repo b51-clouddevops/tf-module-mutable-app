@@ -15,3 +15,12 @@ data "terraform_remote_state" "alb" {
     region = "us-east-1"
   }
 }
+
+
+# Fecthes the AMI ID of the AMI To Use
+data "aws_ami" "myami" {
+  most_recent      = true
+  name_regex       = "b51-ansible-base"
+  owners           = ["self"]
+}
+
