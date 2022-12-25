@@ -48,7 +48,7 @@ resource "aws_instance" "od" {
 #     ]
 #   }
 }
-aws_spot_instance_request.spot.*.id , aws_instance>.*.id
+aws_spot_instance_request.spot.*.id , aws_instance.od.*.id
 
 # tags for ec2
 resource "aws_ec2_tag" "spot-tags" {
