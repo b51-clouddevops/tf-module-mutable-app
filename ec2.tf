@@ -48,8 +48,8 @@ resource "aws_instance" "od" {
 #     ]
 #   }
 }
- , aws_instance.od.*.id
-> concat(aws_spot_instance_request.spot.*.id, aws_instance.od.*.id)
+ aws_instance.od.*.id
+
 
 
 # tags for ec2
