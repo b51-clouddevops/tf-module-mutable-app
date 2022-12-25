@@ -14,6 +14,16 @@ resource "aws_lb_target_group_attachment" "instances-attach" {
   port             = 8080
 }
 
+# Generates random number in the range of 
+resource "random_integer" "priority" {
+  min = 1
+  max = 50000
+  keepers = {
+    # Generate a new integer each time we switch to a new listener ARN
+    listener_arn = var.listener_arn
+  }
+}
+
 # Adding Rule inside the created listerer
 resource "aws_lb_listener_rule" "app-rule" {
   listener_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
