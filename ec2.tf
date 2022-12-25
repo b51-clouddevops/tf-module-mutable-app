@@ -49,13 +49,16 @@ resource "aws_instance" "od" {
 #   }
 }
 
-
+# Locals : Locals are used to elimate the repitative things, like functions in bash 
+locals {
+  ALL_INSTANCE_IDS = concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
+}
 
 
 # tags for ec2
 resource "aws_ec2_tag" "name-tags" {
   count       = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT
-  resource_id =  concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
+  resource_id = local
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}
 }
