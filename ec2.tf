@@ -33,7 +33,7 @@ resource "aws_instance" "od" {
   ami                        = data.aws_ami.myami.image_id
   instance_type              = var.INSTANCE_TYPE
   vpc_security_group_ids     = [aws_security_group.allow_app.id]
-  subnet_id                    = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_ID, count.index)
+  subnet_id                  = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_ID, count.index)
 
 #   connection {
 #     type     = "ssh"
@@ -48,14 +48,14 @@ resource "aws_instance" "od" {
 #     ]
 #   }
 }
- aws_instance.od.*.id
+
 
 
 
 # tags for ec2
-resource "aws_ec2_tag" "spot-tags" {
-  count       = var.SPOT_INSTANCE_COUNT +  var.OD_INSTANCE_COUNT
-  resource_id = OD Instances ID's + Spot Instance ID's
+resource "aws_ec2_tag" "name-tags" {
+  count       = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT
+  resource_id =  concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}
 }
