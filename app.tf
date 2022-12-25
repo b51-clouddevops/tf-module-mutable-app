@@ -1,13 +1,13 @@
 resource "null_resource" "app" {
 
-    count = 
+  count = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT 
 
-#   connection {
-#     type     = "ssh"
-#     user     = "centos"
-#     password = "DevOps321"
-#     host     = self.private_ip
-#   }
+  connection {
+    type     = "ssh"
+    user     = "centos"
+    password = "DevOps321"
+    host     = 
+  }
 
 #   provisioner "remote-exec" {
 #     inline = [
@@ -15,3 +15,8 @@ resource "null_resource" "app" {
 #     ]
 #   }
 }
+
+
+count = 3 means 3 servers,
+
+3 servers, 3 different IP addresses.
