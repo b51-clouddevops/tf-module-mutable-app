@@ -1,9 +1,7 @@
 resource "null_resource" "app" {
-
   count = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT 
 
-
-#   provisioner "remote-exec" {
+  provisioner "remote-exec" {
   connection {
     type     = "ssh"
     user     = jsondecode(data.aws_secretsmanager_secret_version.robot-secrets.secret_string)["SSH_USERNAME"]
@@ -16,7 +14,3 @@ resource "null_resource" "app" {
   }
 }
 
-
-count = 3 means 3 servers,
-
-3 servers, 3 different IP addresses.
