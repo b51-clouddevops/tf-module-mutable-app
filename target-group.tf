@@ -21,18 +21,13 @@ resource "aws_lb_listener_rule" "app-rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.static.arn
+    target_group_arn = aws_lb_target_group.app.arn
   }
 
-  condition {
-    path_pattern {
-      values = ["/static/*"]
-    }
-  }
 
   condition {
     host_header {
-      values = ["example.com"]
+      values = ["${var.COMPONENT}-${var.ENV}.data.terraform_remote_state.vpc.outputs."]
     }
   }
 }
