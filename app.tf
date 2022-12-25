@@ -4,8 +4,8 @@ resource "null_resource" "app" {
 
   connection {
     type     = "ssh"
-    user     = "centos"
-    password = "DevOps321"
+    user     = jsondecode(data.aws_secretsmanager_secret_version.robot-secrets.secret_string)["SSH_USERNAME"]
+    password = jsondecode(data.aws_secretsmanager_secret_version.robot-secrets.secret_string)["SSH_PASSWORD"]
     host     = element(local.ALL_INSTANCE_IPS, count.index)
   }
 

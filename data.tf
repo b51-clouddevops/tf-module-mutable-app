@@ -34,10 +34,3 @@ data "aws_secretsmanager_secret_version" "robot-secrets" {
   secret_id = data.aws_secretsmanager_secret.robot-secrets.id
 }
 
-# Fetching the secret value of the above secret
-output "data" {
-  value = jsondecode(data.aws_secretsmanager_secret_version.robot-secrets.secret_string)["DOCDB_USERNAME"]
-}
-
-
-jsondecode(data.aws_secretsmanager_secret_version.robot-secrets.secret_string)["DOCDB_USERNAME"]
