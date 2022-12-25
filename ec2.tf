@@ -48,7 +48,9 @@ resource "aws_instance" "od" {
 #     ]
 #   }
 }
-aws_spot_instance_request.spot.*.id , aws_instance.od.*.id
+ , aws_instance.od.*.id
+> concat(aws_spot_instance_request.spot.*.id, ["b", "c"])
+
 
 # tags for ec2
 resource "aws_ec2_tag" "spot-tags" {
