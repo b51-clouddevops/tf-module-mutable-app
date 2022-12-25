@@ -23,10 +23,7 @@ resource "aws_instance" "od" {
   subnet_id                  = element(data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_ID, count.index)
 }
 
-# Locals : Locals are used to elimate the repitative things, like functions in bash 
-locals {
-  ALL_INSTANCE_IDS = concat(aws_spot_instance_request.spot.*.spot_instance_id, aws_instance.od.*.id)
-}
+
 
 
 # tags for ec2

@@ -6,7 +6,7 @@ resource "null_resource" "app" {
     type     = "ssh"
     user     = "centos"
     password = "DevOps321"
-    host     = 
+    host     = elelocal.ALL_INSTANCE_IPS
   }
 
 #   provisioner "remote-exec" {
