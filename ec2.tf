@@ -48,12 +48,12 @@ resource "aws_instance" "od" {
 #     ]
 #   }
 }
-
+aws_spot_instance_request.spot.*.id , aws_instance>.*.id
 
 # tags for ec2
 resource "aws_ec2_tag" "spot-tags" {
   count       = var.SPOT_INSTANCE_COUNT +  var.OD_INSTANCE_COUNT
-  resource_id = element()
+  resource_id = OD Instances ID's + Spot Instance ID's
   key         = "Name"
   value       = "${var.COMPONENT}-${var.ENV}
 }
