@@ -24,7 +24,6 @@ resource "aws_lb_listener_rule" "app-rule" {
     target_group_arn = aws_lb_target_group.app.arn
   }
 
-
   condition {
     host_header {
       values = ["${var.COMPONENT}-${var.ENV}.${data.terraform_remote_state.vpc.outputs.PRIVATE_HOSTED_ZONENAME}"]
