@@ -13,4 +13,3 @@ resource "aws_lb_target_group_attachment" "instances-attach" {
   target_id        = element(local.ALL_INSTANCE_IDS, count.index)
   port             = 8080
 }
-
