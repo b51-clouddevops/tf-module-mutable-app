@@ -7,8 +7,8 @@ resource "aws_lb_target_group" "app" {
 }
 
 # Attach instances to the target group 
-resource "aws_lb_target_group_attachment" "test" {
-  target_group_arn = aws_lb_target_group.test.arn
+resource "aws_lb_target_group_attachment" "instances-attach" {
+  target_group_arn = aws_lb_target_group.app.arn
   target_id        = aws_instance.test.id
   port             = 80
 }
