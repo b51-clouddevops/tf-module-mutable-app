@@ -26,13 +26,6 @@ resource "aws_spot_instance_request" "spot" {
 #   }
 }
 
-# tags will be created for spot request, not for the server, hence creating the tags for spot-servers
-# resource "aws_ec2_tag" "spot-tags" {
-#   count       = var.SPOT_INSTANCE_COUNT
-#   resource_id = element()
-#   key         = "Name"
-#   value       = "Hello World"
-# }
 
 # Creates On-Demand-Server
 resource "aws_instance" "od" {
@@ -54,4 +47,13 @@ resource "aws_instance" "od" {
 #       "ansible-pull -U https://github.com/b51-clouddevops/ansible.git -e ansible_user=centos -e ansible_password=DevOps321 -e DB_PASSWORD=RoboShop@1 -e COMPONENT=${var.COMPONENT} -e APP_VERSION=${var.APP_VERSION} -e ENV=dev roboshop-pull.yml"
 #     ]
 #   }
+}
+
+
+# tags for ec2
+resource "aws_ec2_tag" "spot-tags" {
+  count       = var.SPOT_INSTANCE_COUNT
+  resource_id = element()
+  key         = "Name"
+  value       = "${var.COMPONENT}-${var.ENV}
 }
