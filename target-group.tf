@@ -39,20 +39,16 @@ resource "aws_lb_listener_rule" "app-rule" {
 }
 
 
-# Adding Rule inside the created private listerer
-resource "aws_lb_listener_rule" "public-app-rule" {
-  count        = var.LB_TYPE == "internal" ? 0 : 1
-  listener_arn = data.terraform_remote_state.alb.outputs.PRIVATE_LISTENER_ARN
-  priority     = random_integer.priority.result   # No two rules should have same priority, hence using the randomly created unique priority number
+# Creating a listener in the public-alb 
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.front_end.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
 
-  action {
+  default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
-  }
-
-  condition {
-    host_header {
-      values = ["${var.COMPONENT}-${var.ENV}.${data.terraform_remote_state.vpc.outputs.PRIVATE_HOSTED_ZONENAME}"]
-    }
+    target_group_arn = aws_lb_target_group.front_end.arn
   }
 }
