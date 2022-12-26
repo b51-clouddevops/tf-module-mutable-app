@@ -14,5 +14,6 @@ resource "null_resource" "app" {
   }
 }
 
-
+# Note: Provisioners are create time by defaut.
+# What it means ?  Provisioners will only run during the resource creation, rest of the times, they won't run.
 
