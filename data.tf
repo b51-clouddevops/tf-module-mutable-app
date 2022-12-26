@@ -34,3 +34,12 @@ data "aws_secretsmanager_secret_version" "robot-secrets" {
   secret_id = data.aws_secretsmanager_secret.robot-secrets.id
 }
 
+# Using data source to fetch the DocDB Endpoint.
+data "terraform_remote_state" "db" {
+  backend = "s3"
+  config = {
+    bucket = "b51-tf-remote-state-bucket"
+    key    = "databases/dev/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
