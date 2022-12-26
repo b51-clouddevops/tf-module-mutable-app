@@ -1,7 +1,7 @@
 resource "null_resource" "app" {
 
   triggers = {
-     always_run = timestamp()   #Everytime, timestamp changes. So, obviously this provisioner runs all the time
+     always_run = timestamp()   # Everytime, timestamp changes. So, obviously this provisioner runs all the time
   }
 
   count = var.SPOT_INSTANCE_COUNT + var.OD_INSTANCE_COUNT 
