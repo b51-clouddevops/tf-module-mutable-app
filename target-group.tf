@@ -42,11 +42,9 @@ resource "aws_lb_listener_rule" "app-rule" {
 # Creating a listener in the public-alb 
 resource "aws_lb_listener" "public-alb-listener" {
   count             = var.LB_TYPE == "internal" ? 0 : 1
-  load_balancer_arn = data.terraform_remote_state.alb.outputs.
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
+  port              = "80"
+  protocol          = "HTTP"
 
   default_action {
     type             = "forward"
