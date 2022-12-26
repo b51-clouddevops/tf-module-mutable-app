@@ -4,6 +4,16 @@ resource "aws_lb_target_group" "app" {
   port     = var.APP_PORT
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.vpc.outputs.VPC_ID
+
+  health_check {
+    path = "/health"
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 2
+    interval = 5
+    matcher = "200"  # has to be HTTP 200 or fails
+  }
+
 }
 
 # Attach instances to the target group 
